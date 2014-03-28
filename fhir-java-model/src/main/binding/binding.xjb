@@ -1,0 +1,99 @@
+<bindings xmlns="http://java.sun.com/xml/ns/jaxb"
+          xmlns:xsi="http://www.w3.org/2000/10/XMLSchema-instance"
+          xmlns:fhir="http://hl7.org/fhir"
+          xmlns:inheritance="http://jaxb2-commons.dev.java.net/basic/inheritance"
+          xmlns:xs="http://www.w3.org/2001/XMLSchema"
+          xmlns:ci="http://jaxb.dev.java.net/plugin/code-injector"
+          xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+          version="2.1">
+
+    <globalBindings generateValueClass="false">
+        <javaType name="java.util.Date" xmlType="fhir:dateTime-primitive"/>
+    </globalBindings>
+
+    <bindings schemaLocation="http://www.hl7.org/implement/standards/fhir/fhir-base.xsd" version="1.0">
+        <schemaBindings>
+            <package name="org.hl7.fhir.model"/>
+        </schemaBindings>
+    </bindings>
+
+<!--
+
+    <bindings schemaLocation="http://www.hl7.org/implement/standards/fhir/patient.xsd" version="1.0">
+        <bindings node="//xs:complexType[@name='Patient']">
+            <inheritance:implements>org.hl7.fhir.instance.model.intf.PatientResource</inheritance:implements>
+            <bindings node=".//xs:element[@name='careProvider']">
+                <property>
+                    <baseType name="org.hl7.fhir.instance.model.intf.Organization_or_Practitioner"/>
+                </property>
+                <test:test/>
+            </bindings>
+            <bindings node=".//xs:element[@name='managingOrganization']">
+                <property>
+                    <baseType name="org.hl7.fhir.instance.model.intf.Organization"/>
+                </property>
+            </bindings>
+            <ci:code>
+            <![CDATA[
+            @Override
+            public org.hl7.fhir.instance.model.Patient asResource() {
+                return this;
+            }
+            @Override
+            public ResourceReference<org.hl7.fhir.instance.model.intf.Patient> asReference() {
+                return null;
+            }
+            ]]>
+            </ci:code>
+        </bindings>
+    </bindings>
+
+    <bindings schemaLocation="http://www.hl7.org/implement/standards/fhir/adversereaction.xsd" version="1.0">
+        <bindings node="//xs:complexType[@name='AdverseReaction']">
+            <inheritance:implements>org.hl7.fhir.instance.model.intf.AdverseReactionResource</inheritance:implements>
+            <bindings node=".//xs:element[@name='subject']">
+                <property>
+                    <baseType name="org.hl7.fhir.instance.model.intf.Patient"/>
+                </property>
+            </bindings>
+            <bindings node=".//xs:element[@name='recorder']">
+                <property>
+                    <baseType name="org.hl7.fhir.instance.model.intf.Patient_or_Practitioner"/>
+                </property>
+            </bindings>
+            <ci:code>
+            <![CDATA[
+            @Override
+            public org.hl7.fhir.instance.model.AdverseReaction asResource() {
+                return this;
+            }
+            @Override
+            public ResourceReference<org.hl7.fhir.instance.model.intf.AdverseReaction> asReference() {
+                return null;
+            }
+            ]]>
+            </ci:code>
+        </bindings>
+    </bindings>
+
+    -->
+
+    <bindings schemaLocation="http://www.hl7.org/implement/standards/fhir/xhtml1-strict.xsd" version="1.0">
+        <!-- Customise the package name -->
+        <!-- rename the value element -->
+        <bindings node="//xs:attributeGroup[@name='i18n']">
+            <bindings node=".//xs:attribute[@name='lang']">
+                <property name="language"/>
+            </bindings>
+        </bindings>
+
+        <bindings node="//xs:element[@name='bdo']">
+            <bindings node=".//xs:attribute[@name='lang']">
+                <property name="language"/>
+            </bindings>
+        </bindings>
+
+
+
+    </bindings>
+</bindings>

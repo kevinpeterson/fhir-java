@@ -1,0 +1,24 @@
+public java.lang.String getUri() {
+    if(this.getIdentifier().size() == 1) {
+        return this.getIdentifier().get(0).getValue();
+    }
+
+    for(org.hl7.fhir.model.Identifier id : this.getIdentifier()) {
+        org.hl7.fhir.model.IdentifierUseList use = id.getUse().getValue();
+        if(use.equals(org.hl7.fhir.model.IdentifierUseList.OFFICIAL)) {
+            return id.getValue();
+        }
+    }
+
+    return null;
+}
+
+public void setUri(java.lang.String uri) {
+    IdentifierImpl id = new IdentifierImpl();
+    id.setValue(uri);
+    IdentifierUseImpl use = new IdentifierUseImpl();
+    use.setValue(org.hl7.fhir.model.IdentifierUseList.OFFICIAL);
+    id.setUse(use);
+
+    this.getIdentifier().add(id);
+}

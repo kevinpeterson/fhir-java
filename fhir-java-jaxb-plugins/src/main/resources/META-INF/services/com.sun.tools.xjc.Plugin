@@ -1,0 +1,5 @@
+edu.mayo.fhir.model.gen.FhirPrimitiveTypesUnwrapperPlugin
+edu.mayo.fhir.model.gen.FhirTraitablePlugin
+edu.mayo.fhir.model.gen.FhirRootElementPlugin
+edu.mayo.fhir.model.gen.FhirResourceReferencePlugin
+edu.mayo.fhir.model.gen.FhirUriPlugin

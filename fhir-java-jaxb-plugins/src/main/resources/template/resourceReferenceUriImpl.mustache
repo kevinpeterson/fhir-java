@@ -1,0 +1,11 @@
+public java.lang.String getUri() {
+    if(this.resource != null && this.resource instanceof org.hl7.fhir.model.UriIdentified) {
+        return ((org.hl7.fhir.model.UriIdentified) this.resource).getUri();
+    } else {
+        return this.uri;
+    }
+}
+
+public void setUri(java.lang.String uri) {
+    this.uri = uri;
+}

@@ -1,0 +1,18 @@
+public java.lang.String getUri() {
+    org.hl7.fhir.model.Identifier id = this.getIdentifier();
+    if(id != null) {
+        return id.getValue();
+    }
+
+    return null;
+}
+
+public void setUri(java.lang.String uri) {
+    IdentifierImpl id = new IdentifierImpl();
+    id.setValue(uri);
+    IdentifierUseImpl use = new IdentifierUseImpl();
+    use.setValue(org.hl7.fhir.model.IdentifierUseList.OFFICIAL);
+    id.setUse(use);
+
+    this.setIdentifier(id);
+}
