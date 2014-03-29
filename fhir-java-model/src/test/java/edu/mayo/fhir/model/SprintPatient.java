@@ -1,3 +1,5 @@
+package edu.mayo.fhir.model;
+
 import org.hl7.fhir.model.trait.FhirExtension;
 
 /**

@@ -74,6 +74,8 @@ public class FhirUriPlugin extends AbstractFhirResourcePlugin {
 
     @Override
     protected void doWithResource(ClassOutline classOutline) {
+        JClass uriIdentified = classOutline.parent().getCodeModel().ref("org.hl7.fhir.model.UriIdentified");
+
         boolean isCollection = false;
         boolean hasIdentifiers = false;
         for (FieldOutline fieldOutline : classOutline.getDeclaredFields()) {
@@ -110,6 +112,7 @@ public class FhirUriPlugin extends AbstractFhirResourcePlugin {
         }
 
         classOutline.ref.direct(sw.toString());
+        classOutline.ref._implements(uriIdentified);
     }
 
 

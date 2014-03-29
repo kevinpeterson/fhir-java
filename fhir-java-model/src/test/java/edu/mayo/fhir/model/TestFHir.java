@@ -1,5 +1,9 @@
+package edu.mayo.fhir.model;
+
+import org.hl7.fhir.model.Organization;
 import org.hl7.fhir.model.Patient;
 import org.hl7.fhir.model.Procedure;
+import org.hl7.fhir.model.impl.OrganizationImpl;
 import org.hl7.fhir.model.impl.PatientImpl;
 import org.hl7.fhir.model.impl.ProcedureImpl;
 import org.hl7.fhir.model.trait.Proxied;
@@ -29,9 +33,13 @@ public class TestFHir {
         mayoPatient.setMyGreeting("HI");
         mayoPatient.setSomething("HI");
 
-        mayoPatient.setManagingOrganization(pr);
+        Organization o = new OrganizationImpl();
+        o.setUri("http://mayo.edu/");
+
+        mayoPatient.setManagingOrganization(o);
 
         System.out.println(pr.getSubject());
+        System.out.println(mayoPatient.getMyGreeting());
 
         JAXBContext jaxbContext = JAXBContext.newInstance(PatientImpl.class);
         Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
