@@ -15,6 +15,9 @@
         <schemaBindings>
             <package name="org.hl7.fhir.model"/>
         </schemaBindings>
+        <bindings node="//xs:complexType[@name='Duration']">
+        	<class name="TimeDuration"/>
+        </bindings>
     </bindings>
 
 <!--

@@ -1,0 +1,8 @@
+
+public long getDuration() {
+	if(this.getStart() == null || this.getEnd() == null) {
+		return 0l;
+	} else {
+		return this.getEnd().getTime() - this.getStart().getTime();
+	}
+}

@@ -42,6 +42,7 @@
                         <arg>-XfhirRootElement</arg>
                         <arg>-XfhirResourceReference</arg>
                         <arg>-XfhirUri</arg>
+                        <arg>-XfhirPeriodDuration</arg>
                     </args>
                     <plugins>
                         <plugin>
