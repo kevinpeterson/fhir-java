@@ -51,7 +51,7 @@ public class FhirResourceReferencePlugin extends com.sun.tools.xjc.Plugin {
                         resource.annotate(XmlTransient.class);
                         getter.body()._return(JExpr.refthis(resource.name()));
 
-                        JMethod setter = clazz.method(JMod.PROTECTED, classOutline.parent().getCodeModel().VOID, "setResource");
+                        JMethod setter = clazz.method(JMod.PUBLIC, classOutline.parent().getCodeModel().VOID, "setResource");
                         JVar var = setter.param(resourceJType, "value");
                         setter.body().assign(JExpr.refthis(resource.name()), var);
                     }
