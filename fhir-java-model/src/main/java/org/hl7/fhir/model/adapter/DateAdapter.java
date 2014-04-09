@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.adapters.XmlAdapter;
 
 import org.hl7.fhir.model.impl.DateImpl;
 
+
 /**
  */
 public class DateAdapter extends XmlAdapter<org.hl7.fhir.model.Date,java.util.Date> {
@@ -25,7 +26,7 @@ public class DateAdapter extends XmlAdapter<org.hl7.fhir.model.Date,java.util.Da
     @Override
     public org.hl7.fhir.model.Date marshal(java.util.Date v) throws Exception {
         if(v != null) {
-            DateImpl b = new DateImpl();
+        	DateImpl b = new DateImpl();
             b.setValue(dateFormat.format(v));
 
             return b;

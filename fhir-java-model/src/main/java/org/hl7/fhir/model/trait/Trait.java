@@ -15,7 +15,8 @@ public class Trait {
     private static String SET_METHOD_PREFIX = "setValue";
     private static String GET_METHOD_PREFIX = "getValue";
 
-    public static <T extends Element,I extends T> I don(final T resource, Class<I> clazz) {
+    @SuppressWarnings("unchecked")
+	public static <T extends Element,I extends T> I don(final T resource, Class<I> clazz) {
         InvocationHandler handler = new InvocationHandler() {
 
             @Override
