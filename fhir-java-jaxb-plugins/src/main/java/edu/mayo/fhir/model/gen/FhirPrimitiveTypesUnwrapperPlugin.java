@@ -28,7 +28,10 @@ public class FhirPrimitiveTypesUnwrapperPlugin extends com.sun.tools.xjc.Plugin 
             new Hl7Primitive("org.hl7.fhir.model.DateTime", Date.class, "org.hl7.fhir.model.adapter.DateTimeAdapter");
     
     private static final Hl7Primitive HL7_DATE =
-            new Hl7Primitive("org.hl7.fhir.model.Date", Date.class, "org.hl7.fhir.model.adapter.DateAdapter");
+            new Hl7Primitive("org.hl7.fhir.model.FhirDate", Date.class, "org.hl7.fhir.model.adapter.DateAdapter");
+    
+    private static final Hl7Primitive HL7_INSTANT =
+            new Hl7Primitive("org.hl7.fhir.model.Instant", Date.class, "org.hl7.fhir.model.adapter.InstantAdapter");
 
     public String getOptionName() {
         return "XfhirPrimitives";
@@ -49,7 +52,7 @@ public class FhirPrimitiveTypesUnwrapperPlugin extends com.sun.tools.xjc.Plugin 
     public boolean run(Outline outline, Options options, ErrorHandler errorHandler) throws SAXException {
         Map<String,Hl7Primitive> primitiveMap = new HashMap<String,Hl7Primitive>();
         for(Hl7Primitive primitive :
-                Arrays.asList(HL7_STRING, HL7_BOOLEAN, HL7_INTEGER, HL7_DATETIME, HL7_DATE)) {
+                Arrays.asList(HL7_STRING, HL7_BOOLEAN, HL7_INTEGER, HL7_DATETIME, HL7_DATE, HL7_INSTANT)) {
             primitiveMap.put(primitive.hl7Type, primitive);
         }
 

@@ -16,7 +16,10 @@
             <package name="org.hl7.fhir.model"/>
         </schemaBindings>
         <bindings node="//xs:complexType[@name='Duration']">
-        	<class name="TimeDuration"/>
+        	<class name="FhirDuration"/>
+        </bindings>
+        <bindings node="//xs:complexType[@name='date']">
+        	<class name="FhirDate"/>
         </bindings>
     </bindings>
 

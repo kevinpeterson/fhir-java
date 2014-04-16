@@ -41,10 +41,24 @@ public class Trait {
                             resource.getExtension().add(e);
                         }
 
-                        Class<?> parameterClass = args[0].getClass();
-                        String parameterName = method.getParameterTypes()[0].getSimpleName();
+                        Class<?> parameterClass = method.getParameterTypes()[0];
+                        String parameterName = parameterClass.getSimpleName();
 
-                        Method m = e.getClass().getDeclaredMethod(SET_METHOD_PREFIX + parameterName, parameterClass);
+                        Method m = null;
+						try {
+							m = e.getClass().getDeclaredMethod(SET_METHOD_PREFIX + parameterName, parameterClass);
+						} catch (NoSuchMethodException ex) {
+							for(Method setMethod : e.getClass().getDeclaredMethods()) {
+								if(setMethod.getName().startsWith(SET_METHOD_PREFIX + parameterName)) {
+									Class<?> param = setMethod.getParameterTypes()[0];
+									if(param.isAssignableFrom(parameterClass)) {
+										m = setMethod;
+										break;
+									}
+								}	
+							}
+						}
+                        
                         m.invoke(e, args[0]);
                     }
 
@@ -61,7 +75,15 @@ public class Trait {
                 }
 
                 else {
-                    return method.invoke(resource, args);
+                	if(method.getName().equals("equals")) {
+                		Object arg = args[0];
+                		if(arg != null && arg instanceof Proxied) {
+                			args[0] = ((Proxied)arg).getTarget();
+                		}
+                				
+                	}
+                	
+                	return method.invoke(resource, args);
                 }
 
                 return null;

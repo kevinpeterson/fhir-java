@@ -5,17 +5,17 @@ import java.text.SimpleDateFormat;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
-import org.hl7.fhir.model.impl.DateImpl;
+import org.hl7.fhir.model.impl.FhirDateImpl;
 
 
 /**
  */
-public class DateAdapter extends XmlAdapter<org.hl7.fhir.model.Date,java.util.Date> {
+public class DateAdapter extends XmlAdapter<org.hl7.fhir.model.FhirDate,java.util.Date> {
 	
 	private DateFormat dateFormat = new SimpleDateFormat();
 
     @Override
-    public java.util.Date unmarshal(org.hl7.fhir.model.Date v) throws Exception {
+    public java.util.Date unmarshal(org.hl7.fhir.model.FhirDate v) throws Exception {
         if(v != null) {
             return dateFormat.parse(v.getValue());
         } else {
@@ -24,9 +24,9 @@ public class DateAdapter extends XmlAdapter<org.hl7.fhir.model.Date,java.util.Da
     }
 
     @Override
-    public org.hl7.fhir.model.Date marshal(java.util.Date v) throws Exception {
+    public org.hl7.fhir.model.FhirDate marshal(java.util.Date v) throws Exception {
         if(v != null) {
-        	DateImpl b = new DateImpl();
+        	FhirDateImpl b = new FhirDateImpl();
             b.setValue(dateFormat.format(v));
 
             return b;
