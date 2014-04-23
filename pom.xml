@@ -9,6 +9,21 @@
     <artifactId>fhir-java</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
+    
+	<distributionManagement>
+		<repository>
+			<id>informatics-releases</id>
+			<url>http://informatics.mayo.edu/maven/content/repositories/releases</url>
+		</repository>
+		<snapshotRepository>
+			<id>informatics-snapshots</id>
+			<url>http://informatics.mayo.edu/maven/content/repositories/snapshots</url>
+		</snapshotRepository>
+		<site>
+			<id>site-upload-server</id>
+			<url>scp://informatics.mayo.edu:/home/informatics/homes/cts2framework/public_html/sites/${project.artifactId}</url>
+		</site>
+	</distributionManagement>
 
     <modules>
         <module>fhir-java-jaxb-plugins</module>
