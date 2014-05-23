@@ -84,7 +84,7 @@
 
     -->
 
-    <bindings schemaLocation="http://www.hl7.org/implement/standards/fhir/xhtml1-strict.xsd" version="1.0">
+    <bindings schemaLocation="http://www.hl7.org/implement/standards/fhir/fhir-xhtml.xsd" version="1.0">
         <!-- Customise the package name -->
         <!-- rename the value element -->
         <bindings node="//xs:attributeGroup[@name='i18n']">

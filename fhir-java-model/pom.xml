@@ -36,6 +36,7 @@
 					<args>
 						<arg>-Xinheritance</arg>
 						<arg>-Xinject-code</arg>
+						<arg>-Xcollection-setter-injector</arg>
 						<arg>-XfhirPrimitives</arg>
 						<arg>-XfhirTraitable</arg>
 						<arg>-XfhirRootElement</arg>
@@ -48,6 +49,11 @@
 							<groupId>org.jvnet.jaxb2_commons</groupId>
 							<artifactId>jaxb2-basics</artifactId>
 							<version>0.6.5</version>
+						</plugin>
+						<plugin>
+							<groupId>net.java.dev.vcc.thirdparty</groupId>
+							<artifactId>collection-setter-injector</artifactId>
+							<version>0.5.0-1</version>
 						</plugin>
 						<plugin>
 							<groupId>edu.mayo.fhir-java</groupId>
