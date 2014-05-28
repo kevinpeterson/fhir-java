@@ -1,12 +1,12 @@
 package org.hl7.fhir.model.trait;
 
-import org.hl7.fhir.model.Element;
-import org.hl7.fhir.model.Extension;
-import org.hl7.fhir.model.impl.ExtensionImpl;
-
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
+
+import org.hl7.fhir.model.Element;
+import org.hl7.fhir.model.Extension;
+import org.hl7.fhir.model.impl.ExtensionImpl;
 
 /**
  */

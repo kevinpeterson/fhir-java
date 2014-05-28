@@ -4,3 +4,4 @@ edu.mayo.fhir.model.gen.FhirRootElementPlugin
 edu.mayo.fhir.model.gen.FhirResourceReferencePlugin
 edu.mayo.fhir.model.gen.FhirUriPlugin
 edu.mayo.fhir.model.gen.FhirPeriodDurationPlugin
+edu.mayo.fhir.model.gen.FhirFieldRenamingPlugin

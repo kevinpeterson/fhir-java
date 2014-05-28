@@ -43,6 +43,7 @@
 						<arg>-XfhirResourceReference</arg>
 						<arg>-XfhirUri</arg>
 						<arg>-XfhirPeriodDuration</arg>
+						<arg>-XfhirFieldRenaming</arg>
 					</args>
 					<plugins>
 						<plugin>

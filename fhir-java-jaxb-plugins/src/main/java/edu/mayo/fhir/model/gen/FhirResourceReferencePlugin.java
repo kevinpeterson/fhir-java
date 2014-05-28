@@ -44,17 +44,15 @@ public class FhirResourceReferencePlugin extends com.sun.tools.xjc.Plugin {
 
                 for (JDefinedClass clazz : Arrays.asList(classOutline.implClass, classOutline.ref)) {
                     JMethod getter = clazz.method(JMod.PUBLIC, resourceJType, "getResource");
-
+                    JMethod setter = clazz.method(JMod.PUBLIC, classOutline.parent().getCodeModel().VOID, "setResource");
+                    JVar var = setter.param(resourceJType, "value");
+                    
                     if (!clazz.isInterface()) {
                         JFieldVar resource = clazz.field(JMod.PROTECTED, resourceJType, "resource");
-
                         resource.annotate(XmlTransient.class);
                         getter.body()._return(JExpr.refthis(resource.name()));
-
-                        JMethod setter = clazz.method(JMod.PUBLIC, classOutline.parent().getCodeModel().VOID, "setResource");
-                        JVar var = setter.param(resourceJType, "value");
                         setter.body().assign(JExpr.refthis(resource.name()), var);
-                    }
+                    } 
                 }
             }
         }
@@ -72,7 +70,7 @@ public class FhirResourceReferencePlugin extends com.sun.tools.xjc.Plugin {
                     JType referenceJType = classOutline.parent().getCodeModel().ref("org.hl7.fhir.model.Resource");
 
                     for (JDefinedClass clazz : Arrays.asList(classOutline.implClass, classOutline.ref)) {
-                        JMethod setter = clazz.method(JMod.PUBLIC, classOutline.parent().getCodeModel().VOID, "set" + name);
+                        JMethod setter = clazz.method(JMod.PUBLIC, classOutline.parent().getCodeModel().VOID, "set" + name + "Resource");
                         setter.param(referenceJType, "value");
 
                         if (!clazz.isInterface()) {

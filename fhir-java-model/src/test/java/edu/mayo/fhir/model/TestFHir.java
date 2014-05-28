@@ -28,7 +28,7 @@ public class TestFHir {
         mayoPatient.setUri("http://something");
 
         Procedure pr = new ProcedureImpl();
-        pr.setSubject(mayoPatient);
+        pr.setSubjectResource(mayoPatient);
 
         mayoPatient.setMyGreeting("HI");
         mayoPatient.setSomething("HI");
@@ -36,7 +36,7 @@ public class TestFHir {
         Organization o = new OrganizationImpl();
         o.setUri("http://mayo.edu/");
 
-        mayoPatient.setManagingOrganization(o);
+        mayoPatient.setManagingOrganizationResource(o);
 
         System.out.println(pr.getSubject());
         System.out.println(mayoPatient.getMyGreeting());
