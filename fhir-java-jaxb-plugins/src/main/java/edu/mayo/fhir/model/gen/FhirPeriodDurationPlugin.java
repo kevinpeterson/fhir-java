@@ -18,7 +18,7 @@ public class FhirPeriodDurationPlugin extends AbstractMustachePlugin {
         return "XfhirPeriodDuration";
     }
 
-    public List getCustomizationURIs() {
+    public List<String> getCustomizationURIs() {
         return Collections.singletonList("http://edu.mayo/fhir/PeriodDuration");
     }
 

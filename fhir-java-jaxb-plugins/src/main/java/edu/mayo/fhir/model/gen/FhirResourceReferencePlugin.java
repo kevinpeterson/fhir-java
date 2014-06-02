@@ -24,7 +24,7 @@ public class FhirResourceReferencePlugin extends com.sun.tools.xjc.Plugin {
         return "XfhirResourceReference";
     }
 
-    public List getCustomizationURIs() {
+    public List<String> getCustomizationURIs() {
         return Collections.singletonList("http://edu.mayo/fhir/ResourceReference");
     }
 

@@ -1,19 +1,25 @@
 package edu.mayo.fhir.model;
 
+import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.Marshaller;
+import javax.xml.namespace.QName;
+
 import org.hl7.fhir.model.Organization;
 import org.hl7.fhir.model.Patient;
 import org.hl7.fhir.model.Procedure;
 import org.hl7.fhir.model.impl.OrganizationImpl;
 import org.hl7.fhir.model.impl.PatientImpl;
 import org.hl7.fhir.model.impl.ProcedureImpl;
-import org.hl7.fhir.model.trait.Proxied;
 import org.junit.Test;
-
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
-import java.io.StringReader;
-import java.io.StringWriter;
+import org.w3._2005.atom.FeedType;
+import org.w3._2005.atom.impl.ContentTypeImpl;
+import org.w3._2005.atom.impl.EntryTypeImpl;
+import org.w3._2005.atom.impl.FeedTypeImpl;
 
 /**
  */
@@ -33,27 +39,42 @@ public class TestFHir {
         mayoPatient.setMyGreeting("HI");
         mayoPatient.setSomething("HI");
 
-        Organization o = new OrganizationImpl();
+        OrganizationImpl o = new OrganizationImpl();
         o.setUri("http://mayo.edu/");
 
         mayoPatient.setManagingOrganizationResource(o);
 
         System.out.println(pr.getSubject());
         System.out.println(mayoPatient.getMyGreeting());
+        
+        FeedType feed = new FeedTypeImpl();
+        
+        ContentTypeImpl c = new ContentTypeImpl();
+        c.getContent().add(o);
+        
+        EntryTypeImpl e = new EntryTypeImpl();
+        e.getTitleOrLinkOrId().add(new JAXBElement<ContentTypeImpl>(new QName("test"), ContentTypeImpl.class, c));
+ 
+        
+        feed.getTitleOrUpdatedOrId().add(e);
 
-        JAXBContext jaxbContext = JAXBContext.newInstance(PatientImpl.class);
+        JAXBContext jaxbContext = JAXBContext.newInstance(
+        		"com.a9.spec.opensearch.impl:com.a9.spec.opensearch.extensions.relevance.impl:" +
+        		"org.hl7.fhir.model.impl:org.purl.atompub.tombstones._1.impl:" +
+        		"org.w3._1999.xhtml.impl:org.w3._2000._09.xmldsig.impl:" +
+        		"org.w3._2005.atom.impl"
+        		);
         Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 
         jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
         StringWriter w = new StringWriter();
+        
+        JAXBElement f = new JAXBElement(
+        		  new QName("http://www.w3.org/2005/Atom","feed"), FeedTypeImpl.class, feed );
 
-        jaxbMarshaller.marshal(((Proxied)mayoPatient).getTarget(), w);
+        jaxbMarshaller.marshal(f, w);
 
         System.out.println(w);
-
-        Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-        Patient p2 = (Patient) jaxbUnmarshaller.unmarshal(new StringReader(w.toString()));
-
     }
 }

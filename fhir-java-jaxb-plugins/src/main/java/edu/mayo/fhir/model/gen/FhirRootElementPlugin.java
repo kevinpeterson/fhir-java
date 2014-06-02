@@ -12,7 +12,7 @@ public class FhirRootElementPlugin extends AbstractFhirResourcePlugin {
         return "XfhirRootElement";
     }
 
-    public List getCustomizationURIs() {
+    public List<String> getCustomizationURIs() {
         return Collections.singletonList("http://edu.mayo/fhir/RootElement");
     }
 

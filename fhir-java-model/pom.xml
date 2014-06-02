@@ -29,9 +29,10 @@
 					<forceRegenerate>true</forceRegenerate>
 					<schemas>
 						<schema>
-							<url>http://www.hl7.org/implement/standards/fhir/fhir-base.xsd</url>
+							<url>http://www.hl7.org/implement/standards/fhir/fhir-atom.xsd</url>
 						</schema>
 					</schemas>
+					<schemaDirectory>src/main/xsd</schemaDirectory>
 					<bindingDirectory>src/main/binding</bindingDirectory>
 					<args>
 						<arg>-Xinheritance</arg>

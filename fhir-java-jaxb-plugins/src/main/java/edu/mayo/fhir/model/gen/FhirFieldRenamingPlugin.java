@@ -1,16 +1,17 @@
 package edu.mayo.fhir.model.gen;
 
-import com.sun.codemodel.*;
-import com.sun.tools.xjc.Options;
-import com.sun.tools.xjc.outline.ClassOutline;
-import com.sun.tools.xjc.outline.FieldOutline;
-import com.sun.tools.xjc.outline.Outline;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map.Entry;
+
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
 
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import java.util.*;
-import java.util.Map.Entry;
+import com.sun.codemodel.JFieldVar;
+import com.sun.codemodel.JType;
+import com.sun.tools.xjc.Options;
+import com.sun.tools.xjc.outline.ClassOutline;
+import com.sun.tools.xjc.outline.Outline;
 
 public class FhirFieldRenamingPlugin extends com.sun.tools.xjc.Plugin {
 
@@ -19,7 +20,7 @@ public class FhirFieldRenamingPlugin extends com.sun.tools.xjc.Plugin {
         return "XfhirFieldRenaming";
     }
 
-    public List getCustomizationURIs() {
+    public List<String> getCustomizationURIs() {
         return Collections.singletonList("http://edu.mayo/fhir/FhirFieldRenaming");
     }
 
@@ -38,7 +39,8 @@ public class FhirFieldRenamingPlugin extends com.sun.tools.xjc.Plugin {
             for (Entry<String, JFieldVar> field : classOutline.implClass.fields().entrySet()) {
             	String name = field.getValue().type().fullName();
 
-            	if(field.getValue().type().fullName().startsWith(List.class.getName())) {
+            	if(field.getValue().type().fullName().startsWith("org.purl.atompub.tombstones") ||
+            			field.getValue().type().fullName().startsWith(List.class.getName())) {
             		continue;
             	}
             	

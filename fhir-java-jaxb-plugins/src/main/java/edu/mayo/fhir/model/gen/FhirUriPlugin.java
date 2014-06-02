@@ -29,7 +29,7 @@ public class FhirUriPlugin extends AbstractFhirResourcePlugin {
         return "XfhirUri";
     }
 
-    public List getCustomizationURIs() {
+    public List<String> getCustomizationURIs() {
         return Collections.singletonList("http://edu.mayo/fhir/Uri");
     }
 

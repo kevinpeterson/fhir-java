@@ -11,7 +11,7 @@ public class FhirTraitablePlugin extends AbstractFhirResourcePlugin {
         return "XfhirTraitable";
     }
 
-    public List getCustomizationURIs() {
+    public List<String> getCustomizationURIs() {
         return Collections.singletonList("http://edu.mayo/fhir/Traitable");
     }
 

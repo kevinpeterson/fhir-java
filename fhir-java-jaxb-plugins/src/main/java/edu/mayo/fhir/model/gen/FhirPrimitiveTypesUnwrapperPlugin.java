@@ -1,19 +1,32 @@
 package edu.mayo.fhir.model.gen;
 
-import com.sun.codemodel.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import org.xml.sax.ErrorHandler;
+import org.xml.sax.SAXException;
+
+import com.sun.codemodel.JAnnotationUse;
+import com.sun.codemodel.JDefinedClass;
+import com.sun.codemodel.JExpr;
+import com.sun.codemodel.JFieldVar;
+import com.sun.codemodel.JMethod;
+import com.sun.codemodel.JMod;
+import com.sun.codemodel.JType;
+import com.sun.codemodel.JVar;
 import com.sun.tools.xjc.Options;
 import com.sun.tools.xjc.outline.ClassOutline;
 import com.sun.tools.xjc.outline.FieldOutline;
 import com.sun.tools.xjc.outline.Outline;
-import org.xml.sax.ErrorHandler;
-import org.xml.sax.SAXException;
-
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import java.util.*;
 
 public class FhirPrimitiveTypesUnwrapperPlugin extends com.sun.tools.xjc.Plugin {
-
-    private static final String ADAPTER_PACKAGE = "org.hl7.fhir.model.adapter";
 
     private static final Hl7Primitive HL7_STRING =
             new Hl7Primitive("org.hl7.fhir.model.String", String.class, "org.hl7.fhir.model.adapter.StringAdapter");
@@ -37,7 +50,7 @@ public class FhirPrimitiveTypesUnwrapperPlugin extends com.sun.tools.xjc.Plugin 
         return "XfhirPrimitives";
     }
 
-    public List getCustomizationURIs() {
+    public List<String> getCustomizationURIs() {
         return Collections.singletonList("http://edu.mayo/fhir/PrimitiveTypesUnwrapper");
     }
 
