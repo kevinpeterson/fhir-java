@@ -1,15 +1,12 @@
 package edu.mayo.fhir.model;
 
 import java.io.StringWriter;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.Marshaller;
 import javax.xml.namespace.QName;
 
-import org.hl7.fhir.model.Organization;
 import org.hl7.fhir.model.Patient;
 import org.hl7.fhir.model.Procedure;
 import org.hl7.fhir.model.impl.OrganizationImpl;
@@ -23,10 +20,10 @@ import org.w3._2005.atom.impl.FeedTypeImpl;
 
 /**
  */
-public class TestFHir {
+public class TestFhir {
 
     @Test
-    public void test() throws Exception {
+    public void testDoned() throws Exception {
         Patient p = new PatientImpl();
 
         SprintPatient mayoPatient = p.don(SprintPatient.class);

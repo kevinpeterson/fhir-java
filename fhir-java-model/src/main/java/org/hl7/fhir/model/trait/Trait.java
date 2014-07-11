@@ -12,9 +12,6 @@ import org.hl7.fhir.model.impl.ExtensionImpl;
  */
 public class Trait {
 
-    private static String SET_METHOD_PREFIX = "setValue";
-    private static String GET_METHOD_PREFIX = "getValue";
-
     @SuppressWarnings("unchecked")
 	public static <T extends Element,I extends T> I don(final T resource, Class<I> clazz) {
         InvocationHandler handler = new InvocationHandler() {
@@ -33,7 +30,7 @@ public class Trait {
 
                     if(method.getName().startsWith("set")) {
 
-                        Extension e = findExtension(extensionUrl, resource.getExtension());
+                        Extension e = TraitUtils.findExtension(extensionUrl, resource.getExtension());
                         if(e == null) {
                             e = new ExtensionImpl();
                             e.setUrl(extensionUrl);
@@ -46,10 +43,10 @@ public class Trait {
 
                         Method m = null;
 						try {
-							m = e.getClass().getDeclaredMethod(SET_METHOD_PREFIX + parameterName, parameterClass);
+							m = e.getClass().getDeclaredMethod(TraitUtils.SET_METHOD_PREFIX + parameterName, parameterClass);
 						} catch (NoSuchMethodException ex) {
 							for(Method setMethod : e.getClass().getDeclaredMethods()) {
-								if(setMethod.getName().startsWith(SET_METHOD_PREFIX + parameterName)) {
+								if(setMethod.getName().startsWith(TraitUtils.SET_METHOD_PREFIX + parameterName)) {
 									Class<?> param = setMethod.getParameterTypes()[0];
 									if(param.isAssignableFrom(parameterClass)) {
 										m = setMethod;
@@ -63,12 +60,12 @@ public class Trait {
                     }
 
                     if(method.getName().startsWith("get")) {
-                        Extension e = findExtension(extensionUrl, resource.getExtension());
+                        Extension e = TraitUtils.findExtension(extensionUrl, resource.getExtension());
                         if(e == null) {
                             return null;
                         } else {
                             Class<?> returnType = method.getReturnType();
-                            Method m = e.getClass().getDeclaredMethod(GET_METHOD_PREFIX + returnType.getSimpleName());
+                            Method m = e.getClass().getDeclaredMethod(TraitUtils.GET_METHOD_PREFIX + returnType.getSimpleName());
                             return m.invoke(e);
                         }
                     }
@@ -94,16 +91,6 @@ public class Trait {
         Proxied proxy = (Proxied) Proxy.newProxyInstance(resource.getClass().getClassLoader(), new Class[]{clazz, Proxied.class}, handler);
 
         return (I) proxy;
-    }
-
-    private static Extension findExtension(String url, Iterable<Extension> extensions) {
-        for(Extension extension : extensions) {
-            if(extension.getUrl().equals(url)) {
-                return extension;
-            }
-        }
-
-        return null;
     }
 
 }

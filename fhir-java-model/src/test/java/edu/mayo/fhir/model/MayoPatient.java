@@ -11,6 +11,6 @@ public interface MayoPatient extends Patient {
     public String getMyGreeting();
 
     @FhirExtension("http://mayo.edu/sprint/KevinExtension")
-    public String setMyGreeting(String value);
+    public void setMyGreeting(String value);
 
 }
