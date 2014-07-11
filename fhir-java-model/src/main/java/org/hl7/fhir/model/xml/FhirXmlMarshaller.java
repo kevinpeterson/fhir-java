@@ -62,7 +62,7 @@ public class FhirXmlMarshaller {
 	public <T> T unmarshall(InputStream in, Class<T> clazz)
 			throws JAXBException {
 		Object obj = ((JAXBElement)this.unmarshaller.unmarshal(in)).getValue();
-		if(clazz != null) {
+		if(clazz != null && obj.getClass() != clazz) {
 			try {
 				T newType = clazz.newInstance();
 				
