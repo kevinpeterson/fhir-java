@@ -44,6 +44,7 @@ public class FhirXmlMarshaller {
 		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 
 		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+		marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-16");
 
 		this.marshaller = marshaller;
 		this.unmarshaller = unmarshaller;
