@@ -40,9 +40,9 @@ public class FhirXmlMarshaller {
 						+ "org.w3._2000._09.xmldsig.impl:"
 						+ "org.w3._2005.atom.impl");
 		
-		Marshaller marshaller = jaxbContext.createMarshaller();
 		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 
+		Marshaller marshaller = jaxbContext.createMarshaller();
 		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 		marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-16");
 

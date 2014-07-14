@@ -22,9 +22,9 @@ public class TestFhirXmlMarshaller {
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		m.marshall(impl, out);
 		
-		System.out.println(out.toString());
+		System.out.println(out.toString("UTF-16"));
 		
-		assert(out.toString().contains("<valueString value=\"hi\"/>"));		
+		assertTrue(out.toString("UTF-16").contains("<valueString value=\"hi\"/>"));		
 	}
 	
 	@Test
@@ -38,7 +38,7 @@ public class TestFhirXmlMarshaller {
 		m.marshall(impl, out);
 
 		MayoPatientImpl returnedImpl = 
-				m.unmarshall(IOUtils.toInputStream(out.toString()), MayoPatientImpl.class);
+				m.unmarshall(IOUtils.toInputStream(out.toString("UTF-16"), "UTF-16"), MayoPatientImpl.class);
 	
 		assertEquals("hi", returnedImpl.getMyGreeting());
 	}
