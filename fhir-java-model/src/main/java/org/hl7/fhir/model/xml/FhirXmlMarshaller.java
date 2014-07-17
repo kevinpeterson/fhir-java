@@ -31,6 +31,10 @@ public class FhirXmlMarshaller {
 	private Unmarshaller unmarshaller;
 	
 	public FhirXmlMarshaller() throws JAXBException {
+		this("");
+	}
+	
+	public FhirXmlMarshaller(String extraContext) throws JAXBException {
 		JAXBContext jaxbContext = JAXBContext
 				.newInstance("com.a9.spec.opensearch.impl:"
 						+ "com.a9.spec.opensearch.extensions.relevance.impl:"
@@ -38,7 +42,7 @@ public class FhirXmlMarshaller {
 						+ "org.purl.atompub.tombstones._1.impl:"
 						+ "org.w3._1999.xhtml.impl:"
 						+ "org.w3._2000._09.xmldsig.impl:"
-						+ "org.w3._2005.atom.impl");
+						+ "org.w3._2005.atom.impl:" + extraContext);
 		
 		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 
@@ -62,7 +66,10 @@ public class FhirXmlMarshaller {
 	
 	public <T> T unmarshall(InputStream in, Class<T> clazz)
 			throws JAXBException {
-		Object obj = ((JAXBElement)this.unmarshaller.unmarshal(in)).getValue();
+		Object obj = this.unmarshaller.unmarshal(in);
+		if(obj instanceof JAXBElement) {
+			obj = ((JAXBElement)obj).getValue();
+		}
 		if(clazz != null && obj.getClass() != clazz) {
 			try {
 				T newType = clazz.newInstance();
